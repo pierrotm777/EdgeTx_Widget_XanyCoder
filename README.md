@@ -99,12 +99,12 @@ The widget uses **EdgeTX Global Variables** to exchange data with the mix script
 | GV3 | Repeat value |
 | GV4 | Mode |
 | GV5 | Channel memory |
-| GV6 | PROP value (0‑255) |
+| GV6 | PROP value (0-255) |
 
 
 ### Switch Mask
 
-16 switches are packed into a **16‑bit mask**.
+16 switches are packed into a **16 bit mask**.
 
 ```
 mask = GV1 + GV2 * 2048
@@ -220,7 +220,7 @@ The UI uses **libGUI** components:
 * Customizable colors
 * Optional shadows
 
-The slider controls the **PROP value (0‑255)** and displays the percentage.
+The slider controls the **PROP value (0-255)** and displays the percentage.
 
 
 
@@ -270,9 +270,9 @@ Script: xanytx.lua
 
 ## 5. Configure Receiver / Decoder
 
-Ensure your X‑Any decoder is connected to the chosen RC channel.
+Ensure your XAny decoder is connected to the chosen RC channel.
 
-Example with **XanySpy**:
+Example with **Xany2Spy**:
 
 ```
 PROP = 1
@@ -287,8 +287,8 @@ SW_NB = 16
 
 * Radiomaster **TX16S**
 * EdgeTX **2.11.x**
-* Multiplex **X‑Any**
-* Custom Arduino **XanySpy decoder**
+* Multiplex **XAny**
+* Custom Arduino **Xany2Spy decoder**
 
 
 
@@ -298,7 +298,7 @@ SW_NB = 16
 
 Planned improvements:
 
-* Multi‑instance support (up to 4 widgets)
+* Multi instances support (up to 4 widgets)
 * Improved layout system
 * Advanced slider styling
 * Optional telemetry feedback
