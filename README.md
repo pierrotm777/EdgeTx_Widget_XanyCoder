@@ -189,7 +189,7 @@ Screen sixteen buttons
 Screen sixteen buttons and one slider   
 ![](SW16+PROP.png)
 
-Screen height buttons  
+Screen Angle and Slider for azimuthal
 ![](ANGLE+PROP.png)
 
 # Hardware Tested
