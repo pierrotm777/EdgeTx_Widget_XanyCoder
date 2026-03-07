@@ -183,7 +183,7 @@ Screen height buttons
 Screen height buttons and one slider  
 ![](SW8+PROP.png)
 
-Screen sixteen buttons
+Screen sixteen buttons  
 ![](SW16.png)
 
 Screen sixteen buttons and one slider   
