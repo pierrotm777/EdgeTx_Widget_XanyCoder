@@ -15,7 +15,7 @@ TX16S → EdgeTX widget → Lua Mix script → RC channel → receiver → X‑A
 The project is composed of two main parts:
 
 * **Widget UI (WIDGETS/XANYCTL)** – graphical interface and state management
-* **Mix script (SCRIPTS/MIXES/xanytx.lua)** – X‑Any protocol generation
+* **Mix script (SCRIPTS/MIXES/xanytx.lua)** – XAny protocol generation
 
 
 ---
@@ -28,11 +28,19 @@ SDCARD/
  │   └─ XANYCTL/
  │        ├─ main.lua
  │        ├─ buttons.lua
- │        └─ README.md
+ │        ├─ TEMPLATE.lua
+ │        ├─ README.md
+ │        └─ Languages/
+ │            └─ cn,de,en,fr,it,sp,ua
  │
  └─ SCRIPTS/
      └─ MIXES/
-          └─ xanytx.lua
+          ├─ xanytx.lua
+		  ├─ xanytx_common.lua
+		  ├─ xanytx1.lua
+		  ├─ xanytx2.lua
+		  ├─ xanytx3.lua
+		  └─ xanytx4.lua
 ```
 
 
@@ -47,7 +55,7 @@ Responsibilities:
 * Store and retrieve values from **EdgeTX Global Variables (GVARS)**
 * Initialize the GUI and load configuration
 
-The widget does **not generate X‑Any frames directly**.  
+The widget does **not generate XAny frames directly**.  
 It only stores user inputs in GVars which are later read by the mix script.
 
 
@@ -69,10 +77,9 @@ Features:
 The UI is intentionally separated from `main.lua` to keep the architecture modular.
 
 
-
 ## xanytx.lua
 
-Lua **Mix Script** responsible for generating the X‑Any signal.
+Lua **Mix Script** responsible for generating the XAny signal.
 
 Responsibilities:
 
@@ -99,22 +106,8 @@ The widget uses **EdgeTX Global Variables** to exchange data with the mix script
 | GV3 | Repeat value |
 | GV4 | Mode |
 | GV5 | Channel memory |
-| GV6 | PROP value (0-255) |
-
-
-### Switch Mask
-
-16 switches are packed into a **16 bit mask**.
-
-```
-mask = GV1 + GV2 * 2048
-```
-
-Each bit represents a switch state.
-
-
-
----
+| GV7 | PROP value (0-255) |
+| GV8 | ANGLE value (0-255) |
 
 # Supported Modes
 
@@ -124,88 +117,7 @@ Each bit represents a switch state.
 | 1 | SW8 + PROP |
 | 2 | SW16 |
 | 3 | SW16 + PROP |
-
-
-
----
-
-# X‑Any Protocol
-
-The X‑Any protocol sends **nibbles encoded as pulse widths**.
-
-### Symbols
-
-| Symbol | Meaning |
-|------|---------|
-| 0‑15 | nibble values |
-| R | repeat previous nibble |
-| I | idle |
-
-### Typical pulse widths
-
-| Symbol | Pulse |
-|------|-------|
-| 0 | ~1024 µs |
-| 5 | ~1300 µs |
-| R | ~1912 µs |
-| I | ~1976 µs |
-
-
-
----
-
-# Frame Structure
-
-```
-I
-DATA_HI
-DATA_LO
-CHECKSUM_HI
-CHECKSUM_LO
-I
-```
-
-Checksum:
-
-```
-checksum = data XOR 0x55
-```
-
-
-
----
-
-# Compression
-
-Repeated nibbles are compressed using the **R symbol**.
-
-Example:
-
-```
-5 5 0 0
-→ 5 R 0 R
-```
-
-
-
----
-
-# Repeat Mechanism
-
-If Repeat = N, the compressed sequence is repeated N times before idle.
-
-Pipeline:
-
-```
-RAW nibbles
-↓
-R compression
-↓
-Repeat
-↓
-Idle
-```
-
+| 4 | ANGLE + PROP |
 
 
 ---
@@ -219,10 +131,9 @@ The UI uses **libGUI** components:
 * Vertical slider
 * Customizable colors
 * Optional shadows
+* Optional languages
 
 The slider controls the **PROP value (0-255)** and displays the percentage.
-
-
 
 ---
 
@@ -234,7 +145,7 @@ Copy the folders to your **EdgeTX SD card**.
 
 ```
 SDCARD/WIDGETS/XANYCTL/
-SDCARD/SCRIPTS/MIXES/xanytx.lua
+SDCARD/SCRIPTS/MIXES/
 ```
 
 
@@ -250,36 +161,14 @@ SDCARD/SCRIPTS/MIXES/xanytx.lua
 
 Available widget options:
 
+* ID
 * MODE
 * CH
 * Repeat
 * OffCol
 * OnCol
 * Shadow
-
-
-## 4. Add Mix Script
-
-On the channel used for X‑Any output:
-
-```
-Source: Lua
-Script: xanytx.lua
-```
-
-
-## 5. Configure Receiver / Decoder
-
-Ensure your XAny decoder is connected to the chosen RC channel.
-
-Example with **Xany2Spy**:
-
-```
-PROP = 1
-SW_NB = 16
-```
-
-
+* Language
 
 ---
 
@@ -289,8 +178,6 @@ SW_NB = 16
 * EdgeTX **2.11.x**
 * Multiplex **XAny**
 * Custom Arduino **Xany2Spy decoder**
-
-
 
 ---
 
