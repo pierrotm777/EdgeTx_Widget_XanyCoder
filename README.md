@@ -176,6 +176,22 @@ Available widget options:
 
 ---
 
+## 4. The sesult
+Screen height buttons  
+![](SW8.png)
+
+Screen height buttons and one slider  
+![](SW8+PROP.png)
+
+Screen sixteen buttons
+![](SW16.png)
+
+Screen sixteen buttons and one slider   
+![](SW16+PROP.png)
+
+Screen height buttons  
+![](ANGLE+PROP.png)
+
 # Hardware Tested
 
 * Radiomaster **TX16S**
