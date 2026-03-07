@@ -1,5 +1,9 @@
 
 # XANYCTL Widget for EdgeTX (Radiomaster TX16S)
+This widget uses the RCUL/XANY protocol created by Rc-Navy.  
+The RCUL project of Rc-Navy is described [here](http://p.loussouarn.free.fr/arduino/exemple/BURC/BURC.html)  
+
+Many thanks to him !  
 
 ## Overview
 
