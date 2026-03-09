@@ -178,6 +178,9 @@ Available widget options:
 
 ## 4. The sesult
 Screen height buttons  
+![](TWO_XANYCTL.png)
+
+Screen height buttons  
 ![](SW8.png)
 
 Screen height buttons and one slider  
