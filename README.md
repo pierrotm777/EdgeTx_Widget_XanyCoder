@@ -177,8 +177,11 @@ Available widget options:
 ---
 
 ## 4. The sesult
-Screen height buttons  
+Screen two Xany control
 ![](TWO_XANYCTL.png)
+
+Screen four Xany control  
+![](FOUR_XANYCTL.png)
 
 Screen height buttons  
 ![](SW8.png)
