@@ -7,14 +7,14 @@ Many thanks to him !
 
 ## Overview
 
-**XANYCTL** is a touchscreen widget for **EdgeTX** designed to control a **Multiplex X‑Any encoder** using Lua.  
+**XANYCTL** is a touchscreen widget for **EdgeTX** designed to control a **Multiplex XAny encoder** using Lua.  
 It provides a graphical interface (buttons + slider) that allows the pilot to control **up to 16 logical switches** and an optional **PROP analog parameter**.
 
-The widget is intended to work with a companion **Mix script** that converts the widget state into a valid **X‑Any pulse stream** sent on a radio channel.
+The widget is intended to work with a companion **Mix script** that converts the widget state into a valid **XAny pulse stream** sent on a radio channel.
 
 Typical use case:
 
-TX16S → EdgeTX widget → Lua Mix script → RC channel → receiver → X‑Any decoder.
+TX16S → EdgeTX widget → Lua Mix script → RC channel → receiver → XAny decoder.
 
 The project is composed of two main parts:
 
@@ -34,9 +34,10 @@ SDCARD/
  │        ├─ buttons.lua
  │        ├─ TEMPLATE.lua
  │        ├─ README.md
- │        └─ Languages/
- │            └─ cn,de,en,fr,it,sp,ua
- │
+ │        ├─ Languages/
+ │        │  └─ cn,de,en,fr,it,sp,ua
+ │        └─ Images/
+ │            └─ all png files
  └─ SCRIPTS/
      └─ MIXES/
           ├─ xanytx.lua
@@ -54,10 +55,10 @@ This is the **widget entry point**.
 
 Responsibilities:
 
-* Define **widget options**
-* Provide the **API used by the UI**
-* Store and retrieve values from **EdgeTX Global Variables (GVARS)**
-* Initialize the GUI and load configuration
+- Define **widget options**
+- Provide the **API used by the UI**
+- Store and retrieve values from **EdgeTX Global Variables (GVARS)**
+- Initialize the GUI and load configuration
 
 The widget does **not generate XAny frames directly**.  
 It only stores user inputs in GVars which are later read by the mix script.
@@ -70,13 +71,13 @@ Contains the **graphical interface** using **libGUI**.
 
 Features:
 
-* Toggle buttons
-* Momentary buttons
-* Vertical PROP slider
-* Rounded UI elements
-* Optional shadows
-* Custom ON/OFF colors
-* Touch interaction
+- Toggle buttons
+- Momentary buttons
+- Vertical PROP slider
+- Rounded UI elements
+- Optional shadows
+- Custom ON/OFF colors
+- Touch interaction
 
 The UI is intentionally separated from `main.lua` to keep the architecture modular.
 
@@ -87,13 +88,13 @@ Lua **Mix Script** responsible for generating the XAny signal.
 
 Responsibilities:
 
-* Read widget state from **GVars**
-* Build the **X‑Any payload**
-* Compute checksum
-* Apply **R compression**
-* Handle **Repeat**
-* Convert nibbles to **EdgeTX pulse widths**
-* Output signal on the assigned RC channel
+- Read widget state from **GVars**
+- Build the **XAny payload**
+- Compute checksum
+- Apply **R compression**
+- Handle **Repeat**
+- Convert nibbles to **EdgeTX pulse widths**
+- Output signal on the assigned RC channel
 
 
 
@@ -110,8 +111,9 @@ The widget uses **EdgeTX Global Variables** to exchange data with the mix script
 | GV3 | Repeat value |
 | GV4 | Mode |
 | GV5 | Channel memory |
+| GV6 | Motors Synchro |
 | GV7 | PROP value (0-255) |
-| GV8 | ANGLE value (0-255) |
+| GV8 | ANGLE value (0-360°) |
 
 # Supported Modes
 
@@ -130,12 +132,13 @@ The widget uses **EdgeTX Global Variables** to exchange data with the mix script
 
 The UI uses **libGUI** components:
 
-* Rounded buttons
-* Toggle and momentary actions
-* Vertical slider
-* Customizable colors
-* Optional shadows
-* Optional languages
+- Rounded buttons
+- Toggle and momentary actions
+- Vertical slider
+- Customizable colors
+- Optional shadows
+- Optional Motors Synchro
+- Optional languages
 
 The slider controls the **PROP value (0-255)** and displays the percentage.
 
@@ -172,6 +175,7 @@ Available widget options:
 * OffCol
 * OnCol
 * Shadow
+* Synchro
 * Language
 
 ---
@@ -200,10 +204,10 @@ Screen Angle and Slider for azimuthal
 
 # Hardware Tested
 
-* Radiomaster **TX16S**
-* EdgeTX **2.11.x**
-* Multiplex **XAny**
-* Custom Arduino **Xany2Spy decoder**
+- Radiomaster **TX16S**
+- EdgeTX **2.11.x**
+- Multiplex **XAny**
+- Custom Arduino **Xany2Spy decoder**
 
 ---
 
@@ -211,10 +215,10 @@ Screen Angle and Slider for azimuthal
 
 Planned improvements:
 
-* Multi instances support (up to 4 widgets)
-* Improved layout system
-* Advanced slider styling
-* Optional telemetry feedback
+- Multi instances support (up to 4 widgets)
+- Improved layout system
+- Advanced slider styling
+- Optional telemetry feedback
 
 
 
